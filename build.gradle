@@ -1,36 +1,32 @@
-import org.codehaus.groovy.runtime.GStringImpl
-
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.1.5'
-	id 'io.spring.dependency-management' version '1.1.3'
+    id 'java'
+    id 'org.springframework.boot' version '3.1.5'
+    id 'io.spring.dependency-management' version '1.1.3'
 }
 
 group = 'solutions.mundovirtual'
 version = '0.0.1-SNAPSHOT'
 
 java {
-	sourceCompatibility = '17'
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
 }
 
 allprojects {
-	repositories {
-		mavenCentral()
-	}
-
-	project.ext.pringbootweb = "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" as GStringImpl
-	project.ext.pringbootwebtest = "org.springframework.boot:spring-boot-starter-web:${springBootVersion}" as GStringImpl
+    project.ext.springbootweb = 'org.springframework.boot:spring-boot-starter-web:3.1.5'
+    project.ext.springboottest = 'org.springframework.boot:spring-boot-starter-test:3.1.5'
 }
 
-
-
 dependencies {
-	implementation project.ext.pringbootweb //'org.springframework.boot:spring-boot-starter-web'
-	testImplementation project.ext.pringbootwebtest //'org.springframework.boot:spring-boot-starter-test'
+    implementation project.ext.springbootweb
+    testImplementation project.ext.springboottest
 
-	implementation project(':work-experience')
+    implementation project(':experience')
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
